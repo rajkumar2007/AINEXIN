@@ -1,0 +1,265 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="2299.7">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
+  </style>
+</head>
+<body>
+<p class="p1"><span class="Apple-converted-space"> </span>&lt;!DOCTYPE html&gt;</p>
+<p class="p1">&lt;html&gt;</p>
+<p class="p1">&lt;head&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;title&gt;Comprehensive Metrics Dashboard (v13)&lt;/title&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;style&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>/* Existing CSS code from v13 */</p>
+<p class="p1"><span class="Apple-converted-space">    </span>body, h1, h2, p, label, input, button {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>margin: 0;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>padding: 1;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>border: 1;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>font-size: 100%;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>vertical-align: baseline;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>body {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>background-color: #f2f2f2;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>color: #333;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>font-family: 'Arial', sans-serif;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>.container {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>display: flex;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>flex-wrap: wrap;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>justify-content: center;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>.column {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>flex-basis: calc(10.333% - 16px);</p>
+<p class="p1"><span class="Apple-converted-space">      </span>background-color: #fff;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>padding: 10px;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>margin: 10px;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>border-radius: 10px;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>h1, h2 {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>color: #007BFF;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>margin-bottom: 20px;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>label, input, p {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>margin-bottom: 20px;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>button {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>padding: 12px 24px;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>background-color: #007BFF;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>color: white;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>border-radius: 12px;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);</p>
+<p class="p1"><span class="Apple-converted-space">      </span>cursor: pointer;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;/style&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;script&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>function calculateAllMetrics() {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>// Common formula for benefit</p>
+<p class="p1"><span class="Apple-converted-space">      </span>const commonFormula = (oldVal, newVal) =&gt; ((oldVal - newVal) / oldVal) * 100;</p>
+<p class="p2"><span class="Apple-converted-space">      </span></p>
+<p class="p1"><span class="Apple-converted-space">      </span>// Existing metrics</p>
+<p class="p1"><span class="Apple-converted-space">       </span>const metrics = [</p>
+<p class="p1"><span class="Apple-converted-space">        </span>"EpicCycleTime", "StoryCycleTime", "FirstCommitToDeploy", "LastCommitToDeploy",</p>
+<p class="p1"><span class="Apple-converted-space">        </span>"NumberOfDeployments", "MeanTimeToAcknowledge", "MeanTimeToRecover", "ChangeFailureRate",</p>
+<p class="p1"><span class="Apple-converted-space">        </span>"DeploymentFrequency", "LeadTimeForChanges", "TimeToRecover", "ErrorRates",</p>
+<p class="p1"><span class="Apple-converted-space">        </span>"PerformanceMetrics", "ComplianceScore", "Velocity", "CommitToDeployTime",</p>
+<p class="p1"><span class="Apple-converted-space">        </span>"EmployeeSatisfaction", "SecurityRating", "HotspotsReviewed", "SecurityRiskScore"</p>
+<p class="p1"><span class="Apple-converted-space">      </span>];</p>
+<p class="p1"><span class="Apple-converted-space">      </span>let overallBenefit = 0;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">      </span>metrics.forEach(metric =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const oldVal = parseFloat(document.getElementById(`old${metric}`).value);</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const newVal = parseFloat(document.getElementById(`new${metric}`).value);</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const benefit = commonFormula(oldVal, newVal);</p>
+<p class="p1"><span class="Apple-converted-space">        </span>document.getElementById(`${metric}Benefit`).innerText = benefit.toFixed(2) + "%";</p>
+<p class="p1"><span class="Apple-converted-space">        </span>overallBenefit += benefit;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>});</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">      </span>// Metric calculations</p>
+<p class="p1"><span class="Apple-converted-space">      </span>let overallBenefit = 0;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>metrics.forEach(metric =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const oldVal = parseFloat(document.getElementById(`old${metric}`).value);</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const newVal = parseFloat(document.getElementById(`new${metric}`).value);</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const benefit = commonFormula(oldVal, newVal);</p>
+<p class="p1"><span class="Apple-converted-space">        </span>document.getElementById(`${metric}Benefit`).innerText = benefit.toFixed(2) + "%";</p>
+<p class="p1"><span class="Apple-converted-space">        </span>overallBenefit += benefit;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>});</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">      </span>// SRS calculation</p>
+<p class="p1"><span class="Apple-converted-space">      </span>const oldSRS = 4*parseFloat(document.getElementById('oldBlocker').value) +<span class="Apple-converted-space"> </span></p>
+<p class="p1"><span class="Apple-converted-space">                     </span>3*parseFloat(document.getElementById('oldCritical').value) +<span class="Apple-converted-space"> </span></p>
+<p class="p1"><span class="Apple-converted-space">                     </span>2*parseFloat(document.getElementById('oldMajor').value) +<span class="Apple-converted-space"> </span></p>
+<p class="p1"><span class="Apple-converted-space">                     </span>parseFloat(document.getElementById('oldMinor').value);</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">      </span>const newSRS = 4*parseFloat(document.getElementById('newBlocker').value) +<span class="Apple-converted-space"> </span></p>
+<p class="p1"><span class="Apple-converted-space">                     </span>3*parseFloat(document.getElementById('newCritical').value) +<span class="Apple-converted-space"> </span></p>
+<p class="p1"><span class="Apple-converted-space">                     </span>2*parseFloat(document.getElementById('newMajor').value) +<span class="Apple-converted-space"> </span></p>
+<p class="p1"><span class="Apple-converted-space">                     </span>parseFloat(document.getElementById('newMinor').value);</p>
+<p class="p2"><span class="Apple-converted-space">                     </span></p>
+<p class="p1"><span class="Apple-converted-space">      </span>const srsBenefit = commonFormula(oldSRS, newSRS);</p>
+<p class="p1"><span class="Apple-converted-space">      </span>document.getElementById('SRSBenefit').innerText = srsBenefit.toFixed(2) + "%";</p>
+<p class="p1"><span class="Apple-converted-space">      </span>overallBenefit += srsBenefit;</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">      </span>// Overall benefit calculation including SRS</p>
+<p class="p1"><span class="Apple-converted-space">     </span>const overallDevOpsBenefit = overallBenefit / (metrics.length + 1); // +1 for SRS</p>
+<p class="p1"><span class="Apple-converted-space">  </span>document.getElementById("OverallBenefit").innerText = overallDevOpsBenefit.toFixed(2) + "%";</p>
+<p class="p1">}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;/script&gt;</p>
+<p class="p2"><span class="Apple-converted-space">  </span></p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;script&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>function calculateAllMetrics() {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>// Your existing JavaScript code for metric calculations</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>function exportToCSV() {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>const metrics = [</p>
+<p class="p1"><span class="Apple-converted-space">        </span>"EpicCycleTime", "StoryCycleTime", "FirstCommitToDeploy", "LastCommitToDeploy",</p>
+<p class="p1"><span class="Apple-converted-space">        </span>"NumberOfDeployments", "MeanTimeToAcknowledge", "MeanTimeToRecover", "ChangeFailureRate",</p>
+<p class="p1"><span class="Apple-converted-space">        </span>"DeploymentFrequency", "LeadTimeForChanges", "TimeToRecover", "ErrorRates",</p>
+<p class="p1"><span class="Apple-converted-space">        </span>"PerformanceMetrics", "ComplianceScore", "Velocity", "CommitToDeployTime",</p>
+<p class="p1"><span class="Apple-converted-space">        </span>"EmployeeSatisfaction", "SecurityRating", "HotspotsReviewed", "SecurityRiskScore"</p>
+<p class="p1"><span class="Apple-converted-space">      </span>];</p>
+<p class="p2"><span class="Apple-converted-space">      </span></p>
+<p class="p1"><span class="Apple-converted-space">     </span>const srsFields = ['oldBlocker', 'oldCritical', 'oldMajor', 'oldMinor', 'newBlocker', 'newCritical', 'newMajor', 'newMinor'];</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>let csvContent = 'Metric,Old Value,New Value,Benefit\n';</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>metrics.forEach(metric =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>const oldVal = document.getElementById(`old${metric}`).value;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>const newVal = document.getElementById(`new${metric}`).value;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>const benefit = document.getElementById(`${metric}Benefit`).innerText;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>csvContent += `${metric},${oldVal},${newVal},${benefit}\n`;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>});</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>// Adding SRS fields</p>
+<p class="p1"><span class="Apple-converted-space">  </span>srsFields.forEach(field =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>const val = document.getElementById(field).value;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>csvContent += `SRS-${field}, ${val}\n`;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>});</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>// Adding SRSBenefit</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const srsBenefit = document.getElementById('SRSBenefit').innerText;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>csvContent += `SRSBenefit,, ,${srsBenefit}\n`;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const link = document.createElement("a");</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const url = URL.createObjectURL(blob);</p>
+<p class="p1"><span class="Apple-converted-space">  </span>link.setAttribute("href", url);</p>
+<p class="p1"><span class="Apple-converted-space">  </span>link.setAttribute("download", "Metrics_Dashboard.csv");</p>
+<p class="p1"><span class="Apple-converted-space">  </span>link.style.visibility = 'hidden';</p>
+<p class="p1"><span class="Apple-converted-space">  </span>document.body.appendChild(link);</p>
+<p class="p1"><span class="Apple-converted-space">  </span>link.click();</p>
+<p class="p1"><span class="Apple-converted-space">  </span>document.body.removeChild(link);</p>
+<p class="p1">}</p>
+<p class="p1"><span class="Apple-converted-space">      </span>// ... (Your existing code for other metrics) ...</p>
+<p class="p2"><br></p>
+<p class="p1">// SRS calculation</p>
+<p class="p1">const oldSRS = 4 * parseFloat(document.getElementById('oldBlocker').value) +<span class="Apple-converted-space"> </span></p>
+<p class="p1"><span class="Apple-converted-space">              </span>3 * parseFloat(document.getElementById('oldCritical').value) +<span class="Apple-converted-space"> </span></p>
+<p class="p1"><span class="Apple-converted-space">              </span>2 * parseFloat(document.getElementById('oldMajor').value) +<span class="Apple-converted-space"> </span></p>
+<p class="p1"><span class="Apple-converted-space">              </span>parseFloat(document.getElementById('oldMinor').value);</p>
+<p class="p2"><br></p>
+<p class="p1">const newSRS = 4 * parseFloat(document.getElementById('newBlocker').value) +<span class="Apple-converted-space"> </span></p>
+<p class="p1"><span class="Apple-converted-space">              </span>3 * parseFloat(document.getElementById('newCritical').value) +<span class="Apple-converted-space"> </span></p>
+<p class="p1"><span class="Apple-converted-space">              </span>2 * parseFloat(document.getElementById('newMajor').value) +<span class="Apple-converted-space"> </span></p>
+<p class="p1"><span class="Apple-converted-space">              </span>parseFloat(document.getElementById('newMinor').value);</p>
+<p class="p2"><br></p>
+<p class="p1">const srsBenefit = ((oldSRS - newSRS) / oldSRS) * 100;</p>
+<p class="p1">document.getElementById('SRSBenefit').innerText = srsBenefit.toFixed(2) + "%";</p>
+<p class="p2"><br></p>
+<p class="p1">// Security Rating Calculation</p>
+<p class="p1">const getSecurityRating = (srs) =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">  </span>if (srs &lt;= 10) return 'A';</p>
+<p class="p1"><span class="Apple-converted-space">  </span>if (srs &lt;= 20) return 'B';</p>
+<p class="p1"><span class="Apple-converted-space">  </span>if (srs &lt;= 30) return 'C';</p>
+<p class="p1"><span class="Apple-converted-space">  </span>if (srs &lt;= 40) return 'D';</p>
+<p class="p1"><span class="Apple-converted-space">  </span>return 'F';</p>
+<p class="p1">};</p>
+<p class="p2"><br></p>
+<p class="p1">document.getElementById('OldSecurityRating').innerText = getSecurityRating(oldSRS);</p>
+<p class="p1">document.getElementById('NewSecurityRating').innerText = getSecurityRating(newSRS);</p>
+<p class="p2"><br></p>
+<p class="p2"><span class="Apple-converted-space">      </span></p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;/script&gt;</p>
+<p class="p2"><br></p>
+<p class="p2"><span class="Apple-converted-space">  </span></p>
+<p class="p1">&lt;/head&gt;</p>
+<p class="p1">&lt;body&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;h1&gt;Comprehensive Metrics Dashboard (v13)&lt;/h1&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;!-- Application Name --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;label for="appName"&gt;Application Name:&lt;/label&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;input type="text" id="appName"&gt;</p>
+<p class="p2"><span class="Apple-converted-space">  </span></p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;div class="container"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;!-- Existing Metric Columns --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;!-- ... add your existing metric columns here ... --&gt;</p>
+<p class="p1"><span class="Apple-converted-space"> </span>&lt;script&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>const metrics = [</p>
+<p class="p1"><span class="Apple-converted-space">        </span>"EpicCycleTime", "StoryCycleTime", "FirstCommitToDeploy", "LastCommitToDeploy",</p>
+<p class="p1"><span class="Apple-converted-space">        </span>"NumberOfDeployments", "MeanTimeToAcknowledge", "MeanTimeToRecover", "ChangeFailureRate",</p>
+<p class="p1"><span class="Apple-converted-space">        </span>"DeploymentFrequency", "LeadTimeForChanges", "TimeToRecover", "ErrorRates",</p>
+<p class="p1"><span class="Apple-converted-space">        </span>"PerformanceMetrics", "ComplianceScore", "Velocity", "CommitToDeployTime",</p>
+<p class="p1"><span class="Apple-converted-space">        </span>"EmployeeSatisfaction", "SecurityRating", "HotspotsReviewed", "SecurityRiskScore"</p>
+<p class="p1"><span class="Apple-converted-space">      </span>];</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">      </span>metrics.forEach(metric =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">        </span>document.write(`</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;div class="column"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;h2&gt;${metric.replace(/([A-Z])/g, ' $1').trim()}&lt;/h2&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;label for="old${metric}"&gt;Old ${metric.replace(/([A-Z])/g, ' $1').trim()}:&lt;/label&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;input type="number" id="old${metric}"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;label for="new${metric}"&gt;New ${metric.replace(/([A-Z])/g, ' $1').trim()}:&lt;/label&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;input type="number" id="new${metric}"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;p&gt;${metric.replace(/([A-Z])/g, ' $1').trim()} Benefit: &lt;span id="${metric}Benefit"&gt;N/A&lt;/span&gt;&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>`);</p>
+<p class="p1"><span class="Apple-converted-space">      </span>});</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/script&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;!-- SRS Metric --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="column"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;h2&gt;Security Risk Score (SRS)&lt;/h2&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;label for="oldBlocker"&gt;Old Blocker:&lt;/label&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;input type="number" id="oldBlocker"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;label for="oldCritical"&gt;Old Critical:&lt;/label&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;input type="number" id="oldCritical"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;label for="oldMajor"&gt;Old Major:&lt;/label&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;input type="number" id="oldMajor"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;label for="oldMinor"&gt;Old Minor:&lt;/label&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;input type="number" id="oldMinor"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;label for="newBlocker"&gt;New Blocker:&lt;/label&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;input type="number" id="newBlocker"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;label for="newCritical"&gt;New Critical:&lt;/label&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;input type="number" id="newCritical"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;label for="newMajor"&gt;New Major:&lt;/label&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;input type="number" id="newMajor"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;label for="newMinor"&gt;New Minor:&lt;/label&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;input type="number" id="newMinor"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;p&gt;SRS Benefit: &lt;span id="SRSBenefit"&gt;N/A&lt;/span&gt;&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;p&gt;Old Security Rating: &lt;span id="OldSecurityRating"&gt;N/A&lt;/span&gt;&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;p&gt;New Security Rating: &lt;span id="NewSecurityRating"&gt;N/A&lt;/span&gt;&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;/div&gt;</p>
+<p class="p2"><span class="Apple-converted-space">  </span></p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;!-- Calculate Button --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;div style="text-align: center; margin-top: 20px;"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;button onclick="calculateAllMetrics()"&gt;Calculate All Metrics&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;/div&gt;</p>
+<p class="p2"><span class="Apple-converted-space">  </span></p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;!-- Overall DevOps Benefit --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;h2&gt;Overall DevOps Benefit&lt;/h2&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;p&gt;Overall Benefit: &lt;span id="OverallBenefit"&gt;N/A&lt;/span&gt;&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>!-- Export to CSV Button --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;button onclick="exportToCSV()"&gt;Export to CSV&lt;/button&gt;</p>
+<p class="p1">&lt;/body&gt;</p>
+<p class="p1">&lt;/html&gt;</p>
+</body>
+</html>
