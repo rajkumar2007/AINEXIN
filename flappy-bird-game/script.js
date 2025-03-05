@@ -5,8 +5,27 @@ const ctx = canvas.getContext("2d");
 canvas.width = 400;
 canvas.height = 500;
 
+// Load images
+const birdImg = new Image();
+birdImg.src = "assets/bird.png";
+
+const pipeImg = new Image();
+pipeImg.src = "assets/pipes.png";
+
+const bgImg = new Image();
+bgImg.src = "assets/background.png";
+
 // Game variables
-let bird = { x: 50, y: 250, width: 20, height: 20, velocity: 0, gravity: 0.6, jump: -10 };
+let bird = { 
+    x: 50, 
+    y: 250, 
+    width: 30, 
+    height: 30, 
+    velocity: 0, 
+    gravity: 0.4,  // Slower fall
+    jump: -8       // Better control
+};
+
 let pipes = [];
 let score = 0;
 let gameRunning = true;
@@ -20,22 +39,35 @@ document.addEventListener("keydown", function (event) {
 
 // Pipe generator
 function generatePipe() {
+    let gap = 100;
     let height = Math.random() * (canvas.height - 200) + 50;
-    pipes.push({ x: canvas.width, y: 0, width: 40, height: height }); // Top pipe
-    pipes.push({ x: canvas.width, y: height + 100, width: 40, height: canvas.height - height - 100 }); // Bottom pipe
+
+    pipes.push({
+        x: canvas.width,
+        y: height, // Bottom pipe start
+        width: 40,
+        height: canvas.height - height
+    });
+
+    pipes.push({
+        x: canvas.width,
+        y: 0, // Top pipe start
+        width: 40,
+        height: height - gap
+    });
 }
 
-// Function to restart the game
+// Restart function
 function restartGame() {
     bird.y = 250;
     bird.velocity = 0;
     pipes = [];
     score = 0;
     gameRunning = true;
-    gameLoop(); // Restart the game loop
+    gameLoop();
 }
 
-// Detect when the player presses Enter or R to restart
+// Detect Enter or R for restart
 document.addEventListener("keydown", function (event) {
     if (!gameRunning && (event.code === "Enter" || event.code === "KeyR")) {
         restartGame();
@@ -64,7 +96,7 @@ function update() {
             bird.y < pipe.y + pipe.height &&
             bird.y + bird.height > pipe.y
         ) {
-            gameRunning = false; // Game over
+            gameRunning = false;
         }
     }
 
@@ -79,24 +111,27 @@ function update() {
     }
 }
 
-// Draw everything
+// Draw everything with images
 function draw() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
+    // Draw background
+    ctx.drawImage(bgImg, 0, 0, canvas.width, canvas.height);
+
     // Draw bird
-    ctx.fillStyle = "yellow";
-    ctx.fillRect(bird.x, bird.y, bird.width, bird.height);
+    ctx.drawImage(birdImg, bird.x, bird.y, bird.width, bird.height);
 
     // Draw pipes
-    ctx.fillStyle = "green";
-    pipes.forEach(pipe => ctx.fillRect(pipe.x, pipe.y, pipe.width, pipe.height));
+    pipes.forEach(pipe => {
+        ctx.drawImage(pipeImg, pipe.x, pipe.y, pipe.width, pipe.height);
+    });
 
     // Draw score
     ctx.fillStyle = "black";
     ctx.font = "20px Arial";
     ctx.fillText("Score: " + score, 10, 20);
 
-    // Show instructions at the start
+    // Instructions
     if (score === 0) {
         ctx.font = "16px Arial";
         ctx.fillText("Press Spacebar to jump!", 100, 50);
