@@ -1,21 +1,14 @@
-body {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
-    background-color: skyblue;
-    margin: 0;
-    font-family: Arial, sans-serif;
-    text-align: center;
+#startButton {
+    font-size: 20px;
+    padding: 10px 20px;
+    margin-bottom: 10px;
+    cursor: pointer;
+    border: none;
+    background-color: #28a745;
+    color: white;
+    border-radius: 5px;
 }
 
-canvas {
-    background-color: white;
-    border: 2px solid black;
-}
-
-p {
-    font-size: 18px;
-    margin: 5px;
+#startButton:hover {
+    background-color: #218838;
 }

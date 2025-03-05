@@ -1,6 +1,7 @@
 // Get the canvas and context
 const canvas = document.getElementById("gameCanvas");
 const ctx = canvas.getContext("2d");
+const startButton = document.getElementById("startButton");
 
 canvas.width = 400;
 canvas.height = 500;
@@ -22,13 +23,28 @@ let bird = {
     width: 30, 
     height: 30, 
     velocity: 0, 
-    gravity: 0.4,  // Slower fall
-    jump: -8       // Better control
+    gravity: 0.4,  
+    jump: -8       
 };
 
 let pipes = [];
 let score = 0;
-let gameRunning = true;
+let gameRunning = false; // Game starts only when button is clicked
+
+// Start Game function
+function startGame() {
+    gameRunning = true;
+    startButton.style.display = "none"; // Hide button
+    gameLoop();
+}
+
+// Listen for button click OR Enter key to start
+startButton.addEventListener("click", startGame);
+document.addEventListener("keydown", function (event) {
+    if (!gameRunning && event.code === "Enter") {
+        startGame();
+    }
+});
 
 // Jump function
 document.addEventListener("keydown", function (event) {
@@ -44,14 +60,14 @@ function generatePipe() {
 
     pipes.push({
         x: canvas.width,
-        y: height, // Bottom pipe start
+        y: height, 
         width: 40,
         height: canvas.height - height
     });
 
     pipes.push({
         x: canvas.width,
-        y: 0, // Top pipe start
+        y: 0, 
         width: 40,
         height: height - gap
     });
@@ -59,12 +75,15 @@ function generatePipe() {
 
 // Restart function
 function restartGame() {
-    bird.y = 250;
-    bird.velocity = 0;
-    pipes = [];
+    bird.y = 250;        
+    bird.velocity = 0;  
+    pipes = [];          
     score = 0;
     gameRunning = true;
-    gameLoop();
+
+    setTimeout(() => {
+        gameLoop();      
+    }, 100);
 }
 
 // Detect Enter or R for restart
@@ -78,17 +97,12 @@ document.addEventListener("keydown", function (event) {
 function update() {
     if (!gameRunning) return;
 
-    // Bird movement
     bird.velocity += bird.gravity;
     bird.y += bird.velocity;
 
-    // Pipe movement
     pipes.forEach(pipe => pipe.x -= 2);
-
-    // Remove off-screen pipes
     pipes = pipes.filter(pipe => pipe.x + pipe.width > 0);
 
-    // Collision detection
     for (let pipe of pipes) {
         if (
             bird.x < pipe.x + pipe.width &&
@@ -100,12 +114,10 @@ function update() {
         }
     }
 
-    // Prevent bird from going off-screen
     if (bird.y < 0 || bird.y + bird.height > canvas.height) {
         gameRunning = false;
     }
 
-    // Score update
     if (pipes.length > 0 && pipes[0].x + pipes[0].width === bird.x) {
         score++;
     }
@@ -115,23 +127,17 @@ function update() {
 function draw() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-    // Draw background
     ctx.drawImage(bgImg, 0, 0, canvas.width, canvas.height);
-
-    // Draw bird
     ctx.drawImage(birdImg, bird.x, bird.y, bird.width, bird.height);
 
-    // Draw pipes
     pipes.forEach(pipe => {
         ctx.drawImage(pipeImg, pipe.x, pipe.y, pipe.width, pipe.height);
     });
 
-    // Draw score
     ctx.fillStyle = "black";
     ctx.font = "20px Arial";
     ctx.fillText("Score: " + score, 10, 20);
 
-    // Instructions
     if (score === 0) {
         ctx.font = "16px Arial";
         ctx.fillText("Press Spacebar to jump!", 100, 50);
@@ -151,4 +157,3 @@ function gameLoop() {
 
 // Generate pipes at intervals
 setInterval(generatePipe, 2000);
-gameLoop();
