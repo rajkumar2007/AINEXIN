@@ -13,7 +13,7 @@ let gameRunning = true;
 
 // Jump function
 document.addEventListener("keydown", function (event) {
-    if (event.code === "Space") {
+    if (event.code === "Space" && gameRunning) {
         bird.velocity = bird.jump;
     }
 });
@@ -24,6 +24,23 @@ function generatePipe() {
     pipes.push({ x: canvas.width, y: 0, width: 40, height: height }); // Top pipe
     pipes.push({ x: canvas.width, y: height + 100, width: 40, height: canvas.height - height - 100 }); // Bottom pipe
 }
+
+// Function to restart the game
+function restartGame() {
+    bird.y = 250;
+    bird.velocity = 0;
+    pipes = [];
+    score = 0;
+    gameRunning = true;
+    gameLoop(); // Restart the game loop
+}
+
+// Detect when the player presses Enter or R to restart
+document.addEventListener("keydown", function (event) {
+    if (!gameRunning && (event.code === "Enter" || event.code === "KeyR")) {
+        restartGame();
+    }
+});
 
 // Game loop
 function update() {
@@ -79,8 +96,14 @@ function draw() {
     ctx.font = "20px Arial";
     ctx.fillText("Score: " + score, 10, 20);
 
+    // Show instructions at the start
+    if (score === 0) {
+        ctx.font = "16px Arial";
+        ctx.fillText("Press Spacebar to jump!", 100, 50);
+    }
+
     if (!gameRunning) {
-        ctx.fillText("Game Over! Press F5 to Restart", 50, 250);
+        ctx.fillText("Game Over! Press Enter or R to Restart", 50, 250);
     }
 }
 
