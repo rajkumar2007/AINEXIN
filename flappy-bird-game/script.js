@@ -17,25 +17,33 @@ const bgImg = new Image();
 bgImg.src = "assets/background.png";
 
 // Game variables
-let bird = { 
-    x: 50, 
-    y: 250, 
-    width: 30, 
-    height: 30, 
-    velocity: 0, 
-    gravity: 0.4,  
-    jump: -8       
-};
-
+let bird;
 let pipes = [];
 let score = 0;
-let gameRunning = false; // Game starts only when button is clicked
+let gameRunning = false;
+
+// Initialize bird properties
+function resetBird() {
+    bird = {
+        x: 50,
+        y: 250,
+        width: 30,
+        height: 30,
+        velocity: 0,
+        gravity: 0.3,  // Adjusted for smoother fall
+        jump: -6,       // Softer jump
+        canJump: true   // Ensures jump works after restart
+    };
+}
 
 // Start Game function
 function startGame() {
+    resetBird();  // Reset bird before starting
     gameRunning = true;
     startButton.style.display = "none"; // Hide button
-    gameLoop();
+    pipes = [];  // Clear previous pipes
+    score = 0;
+    gameLoop();  // Start the game loop
 }
 
 // Listen for button click OR Enter key to start
@@ -48,8 +56,10 @@ document.addEventListener("keydown", function (event) {
 
 // Jump function
 document.addEventListener("keydown", function (event) {
-    if (event.code === "Space" && gameRunning) {
+    if (event.code === "Space" && gameRunning && bird.canJump) {
         bird.velocity = bird.jump;
+        bird.canJump = false; // Prevents multiple jumps mid-air
+        setTimeout(() => bird.canJump = true, 100); // Re-enable jump
     }
 });
 
@@ -75,15 +85,12 @@ function generatePipe() {
 
 // Restart function
 function restartGame() {
-    bird.y = 250;        
-    bird.velocity = 0;  
-    pipes = [];          
+    resetBird();  // Reset bird position & velocity
+    pipes = [];  // Clear pipes
     score = 0;
     gameRunning = true;
-
-    setTimeout(() => {
-        gameLoop();      
-    }, 100);
+    
+    setTimeout(() => gameLoop(), 100); // Delay so bird doesn't fall instantly
 }
 
 // Detect Enter or R for restart
@@ -137,11 +144,6 @@ function draw() {
     ctx.fillStyle = "black";
     ctx.font = "20px Arial";
     ctx.fillText("Score: " + score, 10, 20);
-
-    if (score === 0) {
-        ctx.font = "16px Arial";
-        ctx.fillText("Press Spacebar to jump!", 100, 50);
-    }
 
     if (!gameRunning) {
         ctx.fillText("Game Over! Press Enter or R to Restart", 50, 250);
